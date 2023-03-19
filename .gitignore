@@ -58,3 +58,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+opengen/Library/
+opengen/Temp/
+opengen/UserSettings/
+opengen/Logs/
