@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using opengen.types;
 using UnityEngine;
 
 
@@ -7,6 +8,11 @@ namespace opengen.maths.shapes
 {
     public class EarCutUtil
     {
+        public static List<int> Tessellate(Shape data)
+        {
+            return Tessellate(data.pointList, new Vector2[0][]);
+        }
+        
         public static List<int> Tessellate(IList<Vector2> data)
         {
             return Tessellate(data, new Vector2[0][]);

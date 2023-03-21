@@ -63,7 +63,10 @@ namespace opengen.unityeditor
 		        Vector3 p0 = shape[i].Vector3Flat();
 		        Vector3 p1 = shape[next].Vector3Flat();
 
-		        Handles.DrawLine(p0, p1);
+		        if (_component.drawShape)
+		        {
+			        Handles.DrawLine(p0, p1);
+		        }
 
 		        float handleSize = HandleUtility.GetHandleSize(p0) * 0.13f;
 
