@@ -8,7 +8,12 @@ namespace opengen.maths.shapes
 {
 	public class Convex
 	{
-		public static bool IsConvex(IList<Vector2> points)
+        public static bool IsConvex(Shape shape)
+        {
+            return IsConvex(shape.pointList);
+        }
+
+        public static bool IsConvex(IList<Vector2> points)
 		{
 			int count = points.Count;
 			float previous = 0;

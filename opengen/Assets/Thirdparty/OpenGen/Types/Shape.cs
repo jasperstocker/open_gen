@@ -11,18 +11,18 @@ namespace opengen.types
     [Serializable]
     public class Shape
     {
-        protected List<Vector2> _points;
-        protected float _area;
-        protected AABBox _bounds;
-        protected Vector2 _center;
-        protected Vector2 _centroid;
+        [SerializeField] protected List<Vector2> _points;
+        [SerializeField] protected float _area;
+        [SerializeField] protected AABBox _bounds;
+        [SerializeField] protected Vector2 _center;
+        [SerializeField] protected Vector2 _centroid;
 
-        protected Shape()
+        public Shape()
         {
             _points = new List<Vector2>();
         }
 
-        protected Shape(Vector2[] define)
+        public Shape(Vector2[] define)
         {
             _points = new List<Vector2>(define.Length);
             for (int i = 0; i < define.Length; i++)
@@ -41,7 +41,8 @@ namespace opengen.types
 
         public int pointCount => _points.Count;
         public float area => _area;
-        public Vector2[] points => _points.ToArray();
+        public Vector2[] pointArray => _points.ToArray();
+        public List<Vector2> pointList => _points;
         public AABBox bounds => _bounds;
         public Vector2 center => _center;
         public Vector2 centroid => _centroid;
@@ -50,6 +51,24 @@ namespace opengen.types
         {
             get { return _points[index]; }
             set { _points[index] = value; }
+        }
+        
+        public void Add(Vector2 point)
+        {
+            _points.Add(point);
+            UpdateInternals();
+        }
+
+        public void Insert(int index, Vector2 point)
+        {
+            _points.Insert(index, point);
+            UpdateInternals();
+        }
+
+        public void Remove(int index)
+        {
+            _points.RemoveAt(index);
+            UpdateInternals();
         }
 
         public Vector3 GetV3(int index)

@@ -48,5 +48,10 @@ namespace opengen.maths.shapes
 			}
 			return signedArea / 2 < 0;
 		}
+		
+		public static bool Check(Shape shape)
+		{
+			return Check(shape.pointList);
+		}
 	}
 }
