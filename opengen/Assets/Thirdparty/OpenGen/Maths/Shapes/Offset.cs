@@ -12,6 +12,11 @@ namespace opengen.maths.shapes
     
     public class Offset
     {
+        public static List<Vector2[]> Execute(Shape input, float offset, int signCheck = 0)
+        {
+            return Execute(input.pointList, offset, signCheck);
+        }
+        
         public static List<Vector2[]> Execute(IList<Vector2> input, float offset, int signCheck = 0)
         {
             List<Vector2[]> output = new ();
