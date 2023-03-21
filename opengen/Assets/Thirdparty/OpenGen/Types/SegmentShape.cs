@@ -119,22 +119,16 @@ namespace opengen.types
 			private void ReplaceSegment(Segment2D old, Segment2D newSegmentA, Segment2D newSegmentB)
 			{
 				int index = SegmentIndex(old);
-				// if (index == -1)
-				// {
-				// 	Debug.LogError("no index");
-				// }
 				int previousIndex = (index + _size - 1) % _size;
 				Segment2D previous = segments[previousIndex];
 				
 				int newSize = _size + 1;
 				Segment2D[] newSegments = new Segment2D[newSize];
 				int insertionIndex = 0;
-				bool segmentReplaced = false;
 				for (int i = 0; i < _size; i++)
 				{
 					if (i == index)
 					{
-						segmentReplaced = true;
 						float sqrMag0 = previous.SquareMagnitude(newSegmentA);
 						float sqrMag1 = previous.SquareMagnitude(newSegmentB);
 
@@ -152,8 +146,6 @@ namespace opengen.types
 							newSegments[insertionIndex] = newSegmentA;
 							insertionIndex++;
 						}
-
-						// Debug.Log(i+" "+index+" "+_size);
 					}
 					else
 					{
@@ -161,11 +153,6 @@ namespace opengen.types
 						insertionIndex++;
 					}
 				}
-
-				// if (!segmentReplaced)
-				// {
-				// 	Debug.LogError("ISSUE no segment in this shape");
-				// }
 				
 				segments = newSegments;
 				_size = newSize;

@@ -568,10 +568,14 @@ namespace opengen.types
             return (int)(_rotation * _rect.GetHashCode());
         }
 
-
-        public static OBBox Fit(Vector2[] shape)
+        public static OBBox Fit(Shape shape)
         {
-            int pointCount = shape.Length;
+            return Fit(shape.pointList);
+        }
+
+        public static OBBox Fit(IList<Vector2> shape)
+        {
+            int pointCount = shape.Count;
             if (pointCount < 3)
             {
                 return new OBBox();

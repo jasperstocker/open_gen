@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using opengen.types;
 using UnityEngine;
 
 
@@ -89,7 +86,6 @@ namespace opengen.maths.geo
                 if(maxIt == 0)
                 {
                     throw new Exception("CalculateLatLong : MAX ITERATIONS "+(N - N0 - M));
-                    break;
                 }
             }
 

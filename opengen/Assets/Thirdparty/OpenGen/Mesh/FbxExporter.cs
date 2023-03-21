@@ -322,7 +322,7 @@ namespace opengen.mesh
             }
 
             //MODELS
-            int count = 0;
+            // int count = 0;
 //             foreach (ExportMaterial eMat in exportTextures)
 //             {
 //                 sb.AppendLine("	Model: " + (modelIdent + count) + ", \"Model::" + targetName + ":\", \"DynamicMesh\" {");
@@ -348,7 +348,7 @@ namespace opengen.mesh
 //             }
 
             //MATERIALS
-            count = 0;
+            // count = 0;
             // foreach (ExportMaterial eMat in exportTextures)
             // {
             //     sb.AppendLine("	Material: " + (matieralIdent + count) + ", \"Material::" + eMat.name + "\", \"\" {");
@@ -379,7 +379,7 @@ namespace opengen.mesh
             //TEXTURES
             //If selected - export the textures to the export folder
             //Add the textures to the 
-            count = 0;
+            // count = 0;
             // foreach (ExportMaterial eMat in exportTextures)
             // {
             //     string destinationFile = eMat.filepath;
@@ -468,7 +468,7 @@ namespace opengen.mesh
 
             sb.AppendLine("Connections:  {");
 
-            int conCount = 0;
+            // int conCount = 0;
             // foreach (ExportMaterial eMat in exportTextures)
             // {
             //     sb.AppendLine("	;Model::" + targetName + ", Model::RootNode");
