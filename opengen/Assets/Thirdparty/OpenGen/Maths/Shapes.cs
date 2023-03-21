@@ -834,5 +834,11 @@ namespace opengen.maths
 
             return output;
         }
+
+        public static Vector2 OBBCenter(IList<Vector2> shape)
+        {
+            OBBox obb = OBBFit.CreateConvex(shape);
+            return obb.center;
+        }
     }
 }

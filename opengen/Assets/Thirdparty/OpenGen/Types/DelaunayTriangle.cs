@@ -240,5 +240,10 @@ namespace opengen.types
                 return neighbors;
             }
         }
+
+        public Vector2[] Points()
+        {
+            return new[] { _p0.vector2, _p1.vector2, _p2.vector2 };
+        }
     }
 }

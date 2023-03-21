@@ -86,14 +86,14 @@ namespace opengen.maths.shapes
             return CreateConvexSortedList(convexHull);
         }
 
-        public static OBBox CreateConvex(Vector2[] points)
+        public static OBBox CreateConvex(IList<Vector2> points)
         {
-            if (points.Length == 0)
+            int pointCount = points.Count;
+            if (pointCount == 0)
             {
                 throw new Exception("No points sent!");
             }
 
-            int pointCount = points.Length;
             OBBox defaultBoxFit = GetBox();
             OBBox output = defaultBoxFit;
             float minArea = Numbers.Infinity;

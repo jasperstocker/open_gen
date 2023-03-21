@@ -74,5 +74,12 @@ namespace opengen
 				Gizmos.DrawLine(p2, p0);
 			}
 		}
+
+		public static void DrawPoint(Vector2 position, Matrix4x4 matrix4, Color colour)
+		{
+			Gizmos.color = colour;
+			Gizmos.matrix = matrix4;
+			Gizmos.DrawSphere(position.Vector3Flat(), 0.1f);
+		}
 	}
 }
