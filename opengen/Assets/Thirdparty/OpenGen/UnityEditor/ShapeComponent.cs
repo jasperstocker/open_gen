@@ -8,6 +8,7 @@ namespace opengen.unityeditor
 		public Shape shape;
 		public Color colour = Color.white;
 		public bool drawShape = true;
+		public bool showDirection = true;
 		
 		public void GenerateTriangle()
 		{

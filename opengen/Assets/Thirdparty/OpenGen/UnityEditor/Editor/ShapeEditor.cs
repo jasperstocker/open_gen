@@ -66,10 +66,20 @@ namespace opengen.unityeditor
 		        if (_component.drawShape)
 		        {
 			        Handles.DrawLine(p0, p1);
+
+			        if (_component.showDirection)
+			        {
+				        Vector3 dir = (p1 - p0).normalized * 0.5f;
+				        Vector3 perp = new (-dir.z, 0, dir.x);
+
+				        Handles.DrawLine(p1, p1 - perp - dir);
+				        Handles.DrawLine(p1, p1 + perp - dir);
+				        Handles.DrawLine(p1 - perp - dir, p1 + perp - dir);
+			        }
 		        }
 
-		        float handleSize = HandleUtility.GetHandleSize(p0) * 0.13f;
 
+		        float handleSize = HandleUtility.GetHandleSize(p0) * 0.13f;
 		        if (!controlPress)
 		        {
 			        Vector3 pos = Handles.FreeMoveHandle(p0, Quaternion.identity, handleSize, Vector3.zero, Handles.CircleHandleCap);

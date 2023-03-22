@@ -54,32 +54,52 @@ namespace opengen.maths.shapes
 			{
 				int startIndex = residualShapes[0];
 				int endIndex = residualShapes[1];
+				bool endIsSmaller = endIndex < startIndex;
 				Debug.Log(startIndex+" "+endIndex);
 				int diff = endIndex - startIndex;
 				residualShapes.RemoveRange(0, 2);
 
-				if (diff < 2)
+				if (Mathf.Abs(diff) < 2)
 				{
 					continue;
 				}
 
 				List<Vector2> newShape = new ();
-				newShape.Add(clockwisePoints[startIndex]);
-				newShape.Add(clockwisePoints[(startIndex + 1) % pointCount]);
+				int loopStart = startIndex;
+				if (!endIsSmaller)
+				{
+					newShape.Add(clockwisePoints[startIndex]);
+					newShape.Add(clockwisePoints[(startIndex + 1) % pointCount]);
+					loopStart += 2;
+				}
+				else
+				{
+					newShape.Add(clockwisePoints[endIndex]);
+					newShape.Add(clockwisePoints[startIndex]);
+					loopStart += 1;
+					//endIndex = pointCount;
+				}
 				
 				// if the residual shape is a triangle, we can just add it to the output
 				if (diff == 2)
 				{
+					Debug.Log("final triangle");
+					
 					newShape.Add(clockwisePoints[endIndex % pointCount]);
-					output.Add(newShape);
+					float crossTri = Vector2Extended.Cross(newShape[0], newShape[1], newShape[2]);
+					if (crossTri <= 0)
+					{
+						output.Add(newShape);
+					}
 					continue;
 				}
 				
 				int residualGap0 = -1;
 				Vector2[] newTriangle = new Vector2[3];
 				
-				for (int i = startIndex + 2; i < pointCount; i++)
+				for (int i = loopStart; i < pointCount; i++)
 				{
+					Debug.Log($"new tri{i}");
 					Vector2 p0 = newShape[newShape.Count - 2];
 					Vector2 p1 = newShape[newShape.Count - 1];
 					Vector2 p2 = clockwisePoints[i];
@@ -137,6 +157,8 @@ namespace opengen.maths.shapes
 						{
 							selfIntersects = true;
 						}
+						
+						//going to likely need to test against the new shapes?
 					}
 
 					//Debug.Log(i+" "+isConvex+" "+pointEncapsulated);
@@ -150,7 +172,7 @@ namespace opengen.maths.shapes
 						{
 							residualShapes.Add(residualGap0);
 							residualShapes.Add(i + 1);
-							//Debug.Log(residualGap0+" "+i);
+							Debug.Log($"residualGap Close {residualGap0} {i + 1}");
 						}
 						residualGap0 = -1;
 					}
@@ -159,20 +181,27 @@ namespace opengen.maths.shapes
 						if (residualGap0 == -1)
 						{
 							residualGap0 = i - 1;
-							//Debug.Log(residualGap0);
+							Debug.Log($"residualGap Start {residualGap0}");
 						}
 					}
 					
-					if(i == endIndex - 1)
-					{
-						if (residualGap0 != -1) // close residual shape
-						{
-							residualShapes.Add(residualGap0);
-							residualShapes.Add(endIndex);
-							//Debug.Log(residualGap0+" "+endIndex);
-						}
-						break;
-					}
+					// if(i == endIndex - 1)
+					// {
+					// 	if (residualGap0 != -1) // close residual shape
+					// 	{
+					// 		residualShapes.Add(residualGap0);
+					// 		residualShapes.Add(endIsSmaller ? endIndex : startIndex);
+					// 		Debug.Log("*** "+residualGap0+" "+startIndex+" "+endIndex);
+					// 	}
+					// 	break;
+					// }
+				}
+				
+				if (residualGap0 != -1) // close residual shape
+				{
+					residualShapes.Add(residualGap0);
+					residualShapes.Add(endIsSmaller ? endIndex : startIndex);
+					Debug.Log("*** "+residualGap0+" "+startIndex+" "+endIndex);
 				}
 				
 				output.Add(newShape);
@@ -185,6 +214,7 @@ namespace opengen.maths.shapes
 				}
 			}
 
+			Debug.Log("%%%%%%%%%%%%%");
 			return output;
 		}
 	}
