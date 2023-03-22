@@ -604,6 +604,83 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1114676574
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1114676577}
+  - component: {fileID: 1114676576}
+  - component: {fileID: 1114676575}
+  m_Layer: 0
+  m_Name: Subplot Division
+  m_TagString: Untagged
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1114676575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114676574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d14e3aa324b54635ba52f7c3e4f15c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shapeComponent: {fileID: 1114676576}
+  _inputColour: {r: 0, g: 1, b: 0, a: 1}
+  _outputColour: {r: 1, g: 0, b: 0, a: 1}
+  _seed: 547869
+  _maxArea: 1
+  _cutVariation: 0
+--- !u!114 &1114676576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114676574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6214ee8a62104b52883fe86bb8bbb770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shape:
+    _points:
+    - {x: -4.802462, y: 1.9076806}
+    - {x: -2.0968213, y: 1.3042967}
+    - {x: 2.312448, y: 4.2974887}
+    - {x: 5.1570864, y: 0.23773248}
+    - {x: 1.7678652, y: -2.5705502}
+    - {x: -1.1402236, y: -4.211019}
+    - {x: -3.5980563, y: -3.4097092}
+    _area: 28.628342
+    _center: {x: 4.2951255, y: 1.5201567}
+    _centroid: {x: 4.211931, y: 1.5908674}
+  colour: {r: 0, g: 1, b: 0, a: 1}
+  drawShape: 1
+--- !u!4 &1114676577
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114676574}
+  m_LocalRotation: {x: -0, y: 0.2933852, z: -0, w: 0.95599437}
+  m_LocalPosition: {x: -5.02, y: 0, z: 10.79}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 34.121, z: 0}
 --- !u!1 &1144105855
 GameObject:
   m_ObjectHideFlags: 0

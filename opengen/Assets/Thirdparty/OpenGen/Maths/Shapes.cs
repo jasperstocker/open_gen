@@ -767,6 +767,25 @@ namespace opengen.maths
             return false;
         }
         
+        public static bool Intersects(IList<Vector2> shape, Vector2 segment0, Vector2 segment1)
+        {
+            int aSize = shape.Count;
+
+            for (int ax = 0; ax < aSize; ax++)
+            {
+                Vector2 p0 = shape[ax];
+                int ay = ax < aSize - 1 ? ax + 1 : 0;
+                Vector2 p1 = shape[ay];
+
+                if (Lines.FastLineIntersection(p0, p1, segment0, segment1))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        
         public static Vector2[] SortPointsByDistanceFromCenter(IList<Vector2> polygon)
         {
             // Calculate the center point of the polygon

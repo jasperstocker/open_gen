@@ -6,7 +6,7 @@ using Enumerable = System.Linq.Enumerable;
 
 namespace opengen.maths.shapes
 {
-	public class Convex
+	public static partial class Convex
 	{
         public static bool IsConvex(Shape shape)
         {
@@ -66,6 +66,7 @@ namespace opengen.maths.shapes
             
             if (ShapeUtil.SelfIntersectionCheck(points))
             {
+                Debug.LogWarning("Currently unable to decompose shapes that intersect themselves");
                 return output;
                 //TODO split the shape into shapes that do not intersect
                 // (more complex than initially sounds)

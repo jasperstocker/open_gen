@@ -8,7 +8,7 @@ namespace opengen.maths.shapes
 {
     public static partial class ShapeSplit
     {
-        public static Vector2[][] SubplotDivision(
+        public static List<Vector2[]> SubplotDivision(
             IList<Vector2> initialShape, 
             float maximumArea, 
             uint seed = 58, 
@@ -40,7 +40,7 @@ namespace opengen.maths.shapes
             
             if (initialArea < maximumArea)
             {
-                return process.ToArray();
+                return process.ToList();
             }
 
             int maxIt = Numbers.RoundToInt(Math.Max(1, initialArea / maximumArea)) * 2;
@@ -83,7 +83,15 @@ namespace opengen.maths.shapes
                 // split was not executed - dump the shape to output and continue
                 if (splitCount != 2)
                 {
-                    if (fallbackToLength && !isFallback) fallbackProcess.Enqueue(current); else output.Add(current);
+                    if (fallbackToLength && !isFallback)
+                    {
+                        fallbackProcess.Enqueue(current);
+                    }
+                    else
+                    {
+                        output.Add(current);
+                    }
+
                     continue;
                 }
                 
@@ -92,7 +100,15 @@ namespace opengen.maths.shapes
 
                 if (area0 < Numbers.kEpsilon || area1 < Numbers.kEpsilon)
                 {
-                    if (fallbackToLength && !isFallback) fallbackProcess.Enqueue(current); else output.Add(current);
+                    if (fallbackToLength && !isFallback)
+                    {
+                        fallbackProcess.Enqueue(current);
+                    }
+                    else
+                    {
+                        output.Add(current);
+                    }
+
                     continue;
                 }
 
@@ -125,7 +141,15 @@ namespace opengen.maths.shapes
 
                 if (!validSplit)
                 {
-                    if (fallbackToLength && !isFallback) fallbackProcess.Enqueue(current); else output.Add(current);
+                    if (fallbackToLength && !isFallback)
+                    {
+                        fallbackProcess.Enqueue(current);
+                    }
+                    else
+                    {
+                        output.Add(current);
+                    }
+
                     continue;
                 }
                 
@@ -162,9 +186,39 @@ namespace opengen.maths.shapes
                 }
             }
 
-            return output.ToArray();
+            return output.ToList();
         }
-        
+
+        public static List<Vector2[]> SubplotDivisionConcave(
+            IList<Vector2> initialShape,
+            float maximumArea,
+            uint seed = 58,
+            float cutVariation = 0.0f,
+            float minimumEdgeLength = 0.0f,
+            bool snapPoints = false,
+            bool fallbackToLength = false
+        )
+        {
+            List<Vector2[]> output = new();
+            List<List<Vector2>> convexShapes = Convex.Decompose2(initialShape);
+            foreach (List<Vector2> convexShape in convexShapes)
+            {
+                List<Vector2[]> splitShapes = SubplotDivision(
+                    convexShape,
+                    maximumArea,
+                    seed,
+                    cutVariation,
+                    minimumEdgeLength,
+                    snapPoints,
+                    fallbackToLength
+                );
+                output.AddRange(splitShapes);
+            }
+
+            return output;
+        }
+
+
         public static List<Vector2[]> Executeodl(Vector2[] shape, float maximumArea)
         {
             List<Vector2[]> output = new();
